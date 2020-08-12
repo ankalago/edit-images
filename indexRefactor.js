@@ -3,7 +3,6 @@ const fs = require('fs');
 const {config} = require('./config')
 
 const images = fs.readdirSync('./images');
-const promises = [];
 const startDate = new Date();
 
 const getTimeResultConvert = (start, end) => {
@@ -13,9 +12,9 @@ const getTimeResultConvert = (start, end) => {
 
 const buildPath = (image, base = true) => base ? `./${config.baseFolderImage}/${image}` : `./${config.editFolderImage}/${image}`
 
-const promisesFunctional = images.map(image => promises.push(sharp(buildPath(image)).resize(config.width, config.height).jpeg({quality: config.quality}).toFile(buildPath(image, false))))
+const arrayPromises = images.map(image => sharp(buildPath(image)).resize(config.width, config.height).jpeg({quality: config.quality}).toFile(buildPath(image, false)))
 
-Promise.all(promisesFunctional).then(res => {
+Promise.all(arrayPromises).then(res => {
     getTimeResultConvert(startDate, new Date)
 })
     .catch(err => {
