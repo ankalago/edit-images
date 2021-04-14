@@ -29,6 +29,7 @@ images.forEach(image => {
             .resize(800, 600)
             .jpeg({quality: 80})
             .toFile(imageResult)
+            .concurrency(4)
     );
 })
 

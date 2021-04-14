@@ -21,7 +21,7 @@ Promise.all(arrayPromises).then(res => {
         console.error("Error processing files, let's clean it up", err);
         try {
             images.forEach(image => {
-                fs.unlinkSync(`./edit-images/${image}`);
+                fs.unlinkSync(`./${config.editFolderImage}/${image}`);
             })
         } catch (e) {
             console.error(e);
